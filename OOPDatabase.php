@@ -27,6 +27,7 @@ class OOPDatabase{
 		}
 		return $result;
 	}
+	
 	/*
 	* Input:
 	* 	1) $name: User name
