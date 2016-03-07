@@ -27,7 +27,7 @@ class OOPDatabase{
 		}
 		return $result;
 	}
-	
+
 	/*
 	* Input:
 	* 	1) $name: User name
@@ -174,12 +174,7 @@ class OOPDatabase{
 		//$users = array();
 		$query = mysqli_query($this->_connection, "select * from user");
 		while ($row = mysqli_fetch_array($query)) {
-			$user = new User();
-			$user->id = $row['id'];
-			$user->name = $row['name'];
-			$user->email = $row['email'];
-			$user->password = $row['password'];
-			$users[] = $user;
+			$users[] = $this->loadUser($row);
 		}
 		return $users;
 	}
@@ -208,26 +203,24 @@ class OOPDatabase{
 	public function getMessagesByReceiverId($id){
 		$query = mysqli_query($this->_connection, "select * from message where receiver_id = ".$id);
 		while ($row = mysqli_fetch_array($query)) {
-			$message = new Message();
-			$message->id = $row['id'];
-			$message->message = $row['message'];
-			$message->created_by = $row['created_by'];
-			$message->receiver_id = $row['receiver_id'];
-			$messages[] = $message;
+		$messages[] = $this->loadMessage($row);
 		}
 		return $messages;
 	}
 	public function getMessagesByCreatedBy($id){
 		$query = mysqli_query($this->_connection, "select * from message where created_by = ".$id);
 		while ($row = mysqli_fetch_array($query)) {
-			$message = new Message();
-			$message->id = $row['id'];
-			$message->message = $row['message'];
-			$message->created_by = $row['created_by'];
-			$message->receiver_id = $row['receiver_id'];
-			$messages[] = $message;
+		$messages[] = $this->loadMessage($row);
 		}
 		return $messages;
+	}
+	public function loadMessage($row){
+		$message = new Message();
+		$message->id = $row['id'];
+		$message->message = $row['message'];
+		$message->created_by = $row['created_by'];
+		$message->receiver_id = $row['receiver_id'];
+		return $message;
 	}
 	public function getNameById($id){
 		$query = mysqli_query($this->_connection, "select * from user where id = ".$id);
