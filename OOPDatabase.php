@@ -1,0 +1,238 @@
+<?php
+include('models/User.php');
+
+class OOPDatabase{
+	protected $_connection;
+	
+	public function __construct(){
+		$this->_connection = mysqli_connect('localhost','root','Thanh','company');
+	}
+	/*	Input:
+	1) email
+	2) password
+	return true or faile*/
+	public function login($inputs){
+		$email		=$inputs['email'];
+		$password 	=$inputs['password'];
+		$query = mysqli_query($this->_connection, "select * from user where password='$password' AND email='$email'");
+		if ($query->num_rows == 1) {
+			$row = mysqli_fetch_array($query);
+			$_SESSION['login_user'] = $email;
+			$_SESSION['login_id'] = $row['id'];
+			$_SESSION['login_name'] = $row['name'];
+			$result = true;
+		} 
+		else {
+			$result = false;
+		}
+		return $result;
+	}
+	/*
+	* Input:
+	* 	1) $name: User name
+	*	2) $email: User email
+	* Return: true or false
+	* 	
+	*/
+	public function createUser($inputs){
+		$name	   = $inputs['name'];
+		$email 	   = $inputs['email'];
+		$password  = $inputs['password'];
+		$validData = true;
+		$result = false;
+		if(	strlen($name) == 0 || 
+			strlen($email) == 0 || 
+			strlen($password) == 0) 
+		{
+			$validData = false;
+		}
+		else{
+			$check = mysqli_query($this->_connection, "select * from user where email = '$email'");
+			if ($check->num_rows == o) {
+				$query = mysqli_query($this->_connection, "insert into user (name, email, password)
+								values('$name', '$email', '$password')");
+				$result = true;
+			}
+			else{
+				$result = false;
+			}
+		}
+		return $result;
+	}
+	public function createMessage($inputs){
+		$message     = $inputs['message'];
+		$created_by  = $_SESSION['login_id'];
+		$receiver_id = $inputs['receiver_id'];
+
+		$validData = true;
+		if(	strlen($message) == 0) 
+		{
+			$validData = false;
+			$result = false;
+		}
+		else{
+				$query = mysqli_query($this->_connection, "insert into message (message, created_by, receiver_id)
+								values('$message', '$created_by', '$receiver_id')");
+				$result = true;
+		}
+		return $result;
+	}
+	public function replyMessage($inputs){
+		$message     = $inputs['message'];
+		$created_by  = $_SESSION['login_id'];
+		$receiver_id = $_GET['id'];
+
+		$validData = true;
+		if(	strlen($message) == 0) 
+		{
+			$validData = false;
+			$result = false;
+		}
+		else{
+				$query = mysqli_query($this->_connection, "insert into message (message, created_by, receiver_id)
+								values('$message', '$created_by', '$receiver_id')");
+				$result = true;
+		}
+		return $result;
+	} 
+	/*
+	* Input:
+	* 	1) $name: User name
+	*	2) $email: User email
+	* Return: true or false
+	* 	
+	*/
+	public function updateUser($id, $name, $email, $password){
+		$id 		= $_GET['id'];
+		$name 		= $_POST['name'];
+		$email 		= $_POST['email'];
+		$password 	= $_POST['password'];
+		$validData  = true;
+		if(strlen($name) == 0 ||
+		   strlen($email) == 0  ||
+		   strlen($password) == 0) 
+		{
+			$validData = false;
+		}	
+		else{
+			$check = mysqli_query($this->_connection, "select * from user WHERE id = $id");
+			if($check->num_rows == 1){
+				$query = mysqli_query($this->_connection,"UPDATE `user` SET `name`='$name',`email`='$email',`password`='$password' WHERE `id` = '$id'");
+				$result = true;
+			}
+			else{
+				$result = false;
+			}
+		}
+		return $result;
+		
+	}
+	/*
+	* check ID then delete user_id
+	*/
+	public function deleteUser($user_id){
+		$id = $user_id;
+		$check = mysqli_query($this->_connection, "select * from user WHERE id = $id");
+		if($check->num_rows == 1){
+			$query = mysqli_query($this->_connection,"delete from user where id = $id");
+			$result = true;
+		} 
+		else {
+			$result = false;
+		}
+		return $result;
+	}
+	/*
+	* check ID then delete message_id
+	*/
+	public function deleteMessage($message_id){
+		$id  	  = $message_id;
+		$check    = mysqli_query($this->_connection, "select * from message where id = $id");
+		if($check->num_rows == 1){
+			$query = mysqli_query($this->_connection,"delete from message where id = $id");
+			$result = true;
+		} 
+		else {
+			$result = false;
+		}
+		return $result;
+	}
+	public function getUser($id){
+		$rows = mysqli_query($this->_connection, "select * from user WHERE id = $id");
+		return mysqli_fetch_array($rows);
+		
+	}
+	public function getMessage($id){
+		$rows = mysqli_query($this->_connection, "select *from message where id = $id");
+		return mysqli_fetch_array($rows);	
+	}
+	/*
+	* Return all users in table user
+	*/
+	public function getUsers(){
+		//$users = array();
+		$query = mysqli_query($this->_connection, "select * from user");
+		while ($row = mysqli_fetch_array($query)) {
+			$user = new User();
+			$user->id = $row['id'];
+			$user->name = $row['name'];
+			$user->email = $row['email'];
+			$user->password = $row['password'];
+			$users[] = $user;
+		}
+		return $users;
+	}
+	public function getUserByOtherId($id){
+		$query = mysqli_query($this->_connection, "select * from user where id = ".$id);
+		while ($row = mysqli_fetch_array($query)) {			
+			$users[] = $this->loadUser($row);
+		}
+		return $users;
+	}
+	public function loadUser($row){
+		$user = new User();
+		$user->id = $row['id'];
+		$user->name = $row['name'];
+		$user->email = $row['email'];
+		$user->password = $row['password'];
+		return $user;
+	}
+	/*
+	* Return all message in table message
+	*/
+	public function getMessages(){
+		$query = mysqli_query($this->_connection, "select * from message");
+		return $query;
+	}
+	public function getMessagesByReceiverId($id){
+		$query = mysqli_query($this->_connection, "select * from message where receiver_id = ".$id);
+		while ($row = mysqli_fetch_array($query)) {
+			$message = new Message();
+			$message->id = $row['id'];
+			$message->message = $row['message'];
+			$message->created_by = $row['created_by'];
+			$message->receiver_id = $row['receiver_id'];
+			$messages[] = $message;
+		}
+		return $messages;
+	}
+	public function getMessagesByCreatedBy($id){
+		$query = mysqli_query($this->_connection, "select * from message where created_by = ".$id);
+		while ($row = mysqli_fetch_array($query)) {
+			$message = new Message();
+			$message->id = $row['id'];
+			$message->message = $row['message'];
+			$message->created_by = $row['created_by'];
+			$message->receiver_id = $row['receiver_id'];
+			$messages[] = $message;
+		}
+		return $messages;
+	}
+	public function getNameById($id){
+		$query = mysqli_query($this->_connection, "select * from user where id = ".$id);
+		$row = mysqli_fetch_array($query);
+		$user = new User();
+		$user->name = $row['name'];
+		return $user->name;
+	}
+}
