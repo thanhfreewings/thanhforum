@@ -46,7 +46,7 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <br>
-        <a href = "/company/sign_up.php">Create an account.</a>
+        <a href = "/sign_up.php">Create an account.</a>
       </form>
 
     </div> <!-- /container -->

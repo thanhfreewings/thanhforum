@@ -47,12 +47,12 @@ if($user_Id == 1){
 			echo '<td>'.$user->name.'</td>';
 			echo '<td>'.$user->email.'</td>';
 			echo '<td>'.$user->password.'</td>';
-			echo '<td><a href="/company/create_message.php?id='.$user->id.'">message</a></td>';
-			echo '<td><a href="/company/update_user.php?id='.$user->id.'">update</a></td>';
+			echo '<td><a href="/create_message.php?id='.$user->id.'">message</a></td>';
+			echo '<td><a href="/update_user.php?id='.$user->id.'">update</a></td>';
 			if($user->id == 1){
 				echo '<td></td>';
 			}else{
-				echo '<td><a href="/company/delete_user.php?id='.$user->id.'">delete</a></td>';
+				echo '<td><a href="/delete_user.php?id='.$user->id.'">delete</a></td>';
 			}
 			echo '</tr>';
 

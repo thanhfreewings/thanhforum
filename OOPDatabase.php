@@ -5,7 +5,7 @@ class OOPDatabase{
 	protected $_connection;
 	
 	public function __construct(){
-		$this->_connection = mysqli_connect('localhost','root','Thanh','company');
+		$this->_connection = mysqli_connect('localhost','root','123456','company');
 	}
 	/*	Input:
 	1) email
@@ -78,6 +78,26 @@ class OOPDatabase{
 		}
 		return $result;
 	}
+	public function createThread($inputs){
+		$title      = $inputs['title'];
+		$content    = $inputs['content'];
+		$created_by = $_SESSION['login_id'];
+		$created_at = time();
+
+		$validData = true;
+		if(	strlen($title) == 0 ||
+			strlen($content) == 0 ) 
+		{
+			$validData = false;
+			$result = false;
+		}
+		else{
+				$query = mysqli_query($this->_connection, "insert into thread (title, content, created_by, created_at)
+								values('$title', '$content', '$created_by', '$created_at')");
+				$result = true;
+		}
+		return $result;
+	}
 	public function replyMessage($inputs){
 		$message     = $inputs['message'];
 		$created_by  = $_SESSION['login_id'];
@@ -103,11 +123,11 @@ class OOPDatabase{
 	* Return: true or false
 	* 	
 	*/
-	public function updateUser($id, $name, $email, $password){
+	public function updateUser($inputs){
 		$id 		= $_GET['id'];
-		$name 		= $_POST['name'];
-		$email 		= $_POST['email'];
-		$password 	= $_POST['password'];
+		$name 		= $inputs['name'];
+		$email 		= $inputs['email'];
+		$password 	= $inputs['password'];
 		$validData  = true;
 		if(strlen($name) == 0 ||
 		   strlen($email) == 0  ||
@@ -126,16 +146,37 @@ class OOPDatabase{
 			}
 		}
 		return $result;
-		
+	}
+	public function updateThread($inputs){
+		$id 		= $_GET['id'];
+		$title 		= $inputs['title'];
+		$content 	= $inputs['content'];
+		$updated_at = time();
+		$validData  = true;
+		if(strlen($title) == 0 ||
+		   strlen($content) == 0) 
+		{
+			$validData = false;
+		}	
+		else{
+			$check = mysqli_query($this->_connection, "select * from thread WHERE id = $id");
+			if($check->num_rows == 1){
+				$query = mysqli_query($this->_connection,"UPDATE `thread` SET `title`='$title',`content`='$content',`updated_at`='$updated_at' WHERE `id` = '$id'");
+				$result = true;
+			}
+			else{
+				$result = false;
+			}
+		}
+		return $result;
 	}
 	/*
 	* check ID then delete user_id
 	*/
-	public function deleteUser($user_id){
-		$id = $user_id;
-		$check = mysqli_query($this->_connection, "select * from user WHERE id = $id");
+	public function deleteUser($id){
+		$check = mysqli_query($this->_connection, "select * from user WHERE id = '$id'");
 		if($check->num_rows == 1){
-			$query = mysqli_query($this->_connection,"delete from user where id = $id");
+			$query = mysqli_query($this->_connection,"delete from user where id = '$id'");
 			$result = true;
 		} 
 		else {
@@ -158,6 +199,17 @@ class OOPDatabase{
 		}
 		return $result;
 	}
+	public function deleteThread($id){
+		$check = mysqli_query($this->_connection, "select * from thread WHERE id = $id");
+		if($check->num_rows == 1){
+			$query = mysqli_query($this->_connection,"delete from thread where id = $id");
+			$result = true;
+		} 
+		else {
+			$result = false;
+		}
+		return $result;
+	}
 	public function getUser($id){
 		$rows = mysqli_query($this->_connection, "select * from user WHERE id = $id");
 		return mysqli_fetch_array($rows);
@@ -170,6 +222,34 @@ class OOPDatabase{
 	/*
 	* Return all users in table user
 	*/
+	public function getThread(){
+		$query = mysqli_query($this->_connection, "select * from thread");
+		while ($row = mysqli_fetch_array($query)) {
+			$threads[] = $this->loadThread($row);
+		}
+		return $threads;
+	}
+	public function getThreadByUserCreated($id){
+		$query = mysqli_query($this->_connection, "select * from thread where created_by = $id");
+		while ($row = mysqli_fetch_array($query)) {
+			$threads[] = $this->loadThread($row);
+		}
+		return $threads;	
+	}
+	public function getThreadById($id){
+		$rows = mysqli_query($this->_connection, "select * from thread where id = $id");
+		return mysqli_fetch_array($rows);
+	}
+	public function loadThread($row){
+		$thread = new Thread();
+		$thread->id = $row['id'];
+		$thread->title = $row['title'];
+		$thread->content = $row['content'];
+		$thread->created_by = $row['created_by'];
+		$thread->created_at = $row['created_at'];
+		$thread->updated_at = $row['updated_at'];
+		return $thread;
+	}
 	public function getUsers(){
 		//$users = array();
 		$query = mysqli_query($this->_connection, "select * from user");

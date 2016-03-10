@@ -35,16 +35,20 @@ $messages = $database->getMessagesByReceiverId($receiver_id);
 				echo 	'<td> 		</td>';
 				echo 	'<td> 		</td>';
 				echo '</tr>';
+		if($messages != NULL){
 			foreach($messages as $message)
 			{
 				echo '<tr>';
 				echo 	'<td>'.$message->id.'</td>';
 				echo 	'<td>'.$message->message.'</td>';
 				echo 	'<td>'.$database->getNameById($message->created_by).'</td>';
-				echo 	'<td><a href="/company/reply_message.php?id='.$message->created_by.'">Reply</a></td>';
-				echo 	'<td><a href="/company/delete_message.php?id='.$message->id.'">Delete</a></td>';
+				echo 	'<td><a href="/reply_message.php?id='.$message->created_by.'">Reply</a></td>';
+				echo 	'<td><a href="/delete_message.php?id='.$message->id.'">Delete</a></td>';
 				echo '</tr>';
 			}	
+		}else{
+			echo '<tr><td>your inbox is empty...</td></tr>';
+		}
 		echo '</table>';
 		?>
 	</div>

@@ -9,7 +9,7 @@
 	<body>
 		<div class="oop">
 		<div class="jumbotron">
-		<h4><a href = "/company/home.php">Home</a></h4>
+		<h4><a href = "/home.php">Home</a></h4>
 		<?php
 		class vehicle{
 

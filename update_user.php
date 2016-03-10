@@ -15,7 +15,7 @@
 	//var_dump($user['id']);
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
-		$updateuser = $database->updateUser();
+		$updateuser = $database->updateUser($_POST);
 		if($updateuser == true){
 			header('location: user.php');
 		}else {

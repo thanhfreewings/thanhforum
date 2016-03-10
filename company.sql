@@ -48,6 +48,30 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
+
+CREATE TABLE IF NOT EXISTS `thread` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `content` text NOT NULL,
+  `created_by` int(11) unsigned NOT NULL,
+  `created_at` int(10) NOT NULL,
+  `updated_at` int(10),
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`created_by`) REFERENCES user(`id`)
+)
+
+CREATE TABLE IF NOT EXISTS `post` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `thread_id` int(11) unsigned NOT NULL,
+  `content` text NOT NULL,
+  `created_by` int(11) unsigned NOT NULL,
+  `created_at` int(10) NOT NULL,
+  `updated_at` int(10),
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`created_by`) REFERENCES user(`id`),
+  FOREIGN KEY (`thread_id`) REFERENCES thread(`id`)
+)
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
