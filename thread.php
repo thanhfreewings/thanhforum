@@ -35,13 +35,13 @@ $threads = $database->getThreadByUserCreated($user_Id);
             <?php
                 if($threads != NULL){
                     foreach($threads as $thread) {
-                        echo '<h4><a href="">'.$thread->title.'</a></h4>';
-                        echo '<small><a href="/update_thread.php?id='.$thread->id.'">update  </a> <a href="/delete_thread.php?id='.$thread->id.'">  delete</a></small><br>';
-                        echo '<small>Created at '.$thread->created_at.' new update '.$thread->updated_at.'</small>';
+                        echo '<h4><a href="/view_thread.php?id='.$thread->id.'">'.$thread->title.'</a></h4>';
+                        echo '<p><a href="/update_thread.php?id='.$thread->id.'">update  </a> <a href="/delete_thread.php?id='.$thread->id.'">  delete</a></p>';
+                        echo '<p>Created at '.date('Y-m-d h:i:s',$thread->created_at).' update at '.date('Y-m-d h:i:s',$thread->updated_at).'</p>';
                         echo '<p>'.$thread->content.'</p><br>';
                     }
                 }else{
-                    echo "you don't have a thread...";
+                    echo "you don't have any thread...";
                     }
             ?>
     </div>

@@ -1,5 +1,8 @@
 <?php
 include('models/User.php');
+include('models/Thread.php');
+include('models/Message.php');
+include('models/Comment.php');
 
 class OOPDatabase{
 	protected $_connection;
@@ -97,6 +100,43 @@ class OOPDatabase{
 				$result = true;
 		}
 		return $result;
+	}
+	public function addComment($inputs){
+		$thread_id  = $inputs['thread_id'];
+		$content    = $inputs['content'];
+		$created_by = $_SESSION['login_id'];
+		$created_at = time();
+
+		$validData = true;
+		if(strlen($content) == 0 ) 
+		{
+			$validData = false;
+			$result = false;
+		}
+		else{
+				$query = mysqli_query($this->_connection, "insert into post (thread_id, content, created_by, created_at)
+								values('$thread_id', '$content', '$created_by', '$created_at')");
+				$result = true;
+		}
+		return $result;
+	}
+	public function getCommentByThreadId($id){
+		$comments = array();
+		$query = mysqli_query($this->_connection, "select * from post where thread_id = $id order by id desc");
+		while ($row = mysqli_fetch_array($query)) {
+			$comments[] = $this->loadComment($row);
+		}
+		return $comments;	
+	}
+	public function loadComment($row){
+		$comment = new Comment();
+		$comment->id 		 = $row['id'];
+		$comment->thread_id  = $row['thread_id'];
+		$comment->content    = $row['content'];
+		$comment->created_by = $row['created_by'];
+		$comment->created_at = $row['created_at'];
+		$comment->updated_at = $row['updated_at'];
+		return $comment;
 	}
 	public function replyMessage($inputs){
 		$message     = $inputs['message'];
@@ -223,14 +263,14 @@ class OOPDatabase{
 	* Return all users in table user
 	*/
 	public function getThread(){
-		$query = mysqli_query($this->_connection, "select * from thread");
+		$query = mysqli_query($this->_connection, "select * from thread order by id desc");
 		while ($row = mysqli_fetch_array($query)) {
 			$threads[] = $this->loadThread($row);
 		}
 		return $threads;
 	}
 	public function getThreadByUserCreated($id){
-		$query = mysqli_query($this->_connection, "select * from thread where created_by = $id");
+		$query = mysqli_query($this->_connection, "select * from thread where created_by = $id order by id desc");
 		while ($row = mysqli_fetch_array($query)) {
 			$threads[] = $this->loadThread($row);
 		}
@@ -259,7 +299,7 @@ class OOPDatabase{
 		return $users;
 	}
 	public function getUserByOtherId($id){
-		$query = mysqli_query($this->_connection, "select * from user where id = ".$id);
+		$query = mysqli_query($this->_connection, "select * from user where id = $id");
 		while ($row = mysqli_fetch_array($query)) {			
 			$users[] = $this->loadUser($row);
 		}
@@ -281,14 +321,14 @@ class OOPDatabase{
 		return $query;
 	}
 	public function getMessagesByReceiverId($id){
-		$query = mysqli_query($this->_connection, "select * from message where receiver_id = ".$id);
+		$query = mysqli_query($this->_connection, "select * from message where receiver_id = $id order by id desc");
 		while ($row = mysqli_fetch_array($query)) {
 		$messages[] = $this->loadMessage($row);
 		}
 		return $messages;
 	}
 	public function getMessagesByCreatedBy($id){
-		$query = mysqli_query($this->_connection, "select * from message where created_by = ".$id);
+		$query = mysqli_query($this->_connection, "select * from message where created_by = $id order by id desc");
 		while ($row = mysqli_fetch_array($query)) {
 		$messages[] = $this->loadMessage($row);
 		}
@@ -303,7 +343,7 @@ class OOPDatabase{
 		return $message;
 	}
 	public function getNameById($id){
-		$query = mysqli_query($this->_connection, "select * from user where id = ".$id);
+		$query = mysqli_query($this->_connection, "select * from user where id = $id");
 		$row = mysqli_fetch_array($query);
 		$user = new User();
 		$user->name = $row['name'];

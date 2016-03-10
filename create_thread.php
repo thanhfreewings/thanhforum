@@ -30,21 +30,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 <body>
 	<?php include('menu.php') ?>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<form class="form-horizontal" method="POST">
-					<div class="form-group">
-					<label >Title</label>
-						<input name="title" type="text" class="form-control">
-					</div>
-					<div class="form-group">
-					<label >Content</label>
-						<textarea name="content" class="form-control" rows="3"></textarea>
-					</div>
-					
-					<button type="submit" class="btn btn-default">Create Thread</button>
-				</form>
+	<div class="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<form class="form-horizontal" method="POST">
+						<div class="form-group">
+						<label >Title</label>
+							<input name="title" type="text" class="form-control">
+						</div>
+						<div class="form-group">
+						<label >Content</label>
+							<textarea name="content" class="form-control" rows="3"></textarea>
+						</div>
+						
+						<button type="submit" class="btn btn-default">Create Thread</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
