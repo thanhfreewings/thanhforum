@@ -15,39 +15,62 @@ $user = $database->getUser($user_id);
 	//var_dump($user['id']);
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-	$updateuser = $database->updateUser($_POST);
-	if($updateuser == true){
+	$result = $database->updateUser($_POST);
+	if($result == true){
 		header('location: user.php');
-	}else {
-		die("Failed to update user");
 	}
 }
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>update_user.php</title>
-	<?php include('header.php');?>
-	<link type='text/css' rel='stylesheet' href='style.css'/>
+	<title>Thanhforum</title>
+	<?php include('header.php') ?>
 </head>
 <body>
 	<?php include('menu.php') ?>
+
 	<div class="content">
 		<div class="container">
-			<form class="form-signin" method="POST">
-				<h2 class="form-signin-heading">Update user</h2>
-				<?php if( isset($updateuser) && $updateuser == false): ?>
-					<p>Failed to update user, please try again</p>
-				<?php endif;?>
-				<label for="inputEmail" class="sr-only">Update Name</label>
-				<input value="<?php echo $user['name']; ?>" type="text" id="inputEmail" class="form-control" placeholder="Update Name" name="name">
-				<label for="inputEmail" class="sr-only">Update Email address</label>
-				<input value="<?php echo $user['email']; ?>" type="text" id="inputEmail" class="form-control" placeholder="Update Email address" name="email">
-				<label for="inputPassword" class="sr-only">Update Password</label>
-				<input type="password" id="inputPassword" class="form-control" placeholder="Update Password" name="password">
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Update User</button>
-			</form>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-inverse">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+							</div>
+							<h4 class="panel-title">Update user</h4>
+						</div>
+						<div class="panel-body">
+							<form method="POST">
+								<fieldset>
+									<legend>Enter information to update</legend>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Name</label>
+										<input value="<?php echo $user['name'] ?>" name="name" class="form-control" type="text">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Email address</label>
+										<input value="<?php echo $user['email'] ?>" name="email" class="form-control" type="text">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Password</label>
+										<input value="<?php echo $user['password'] ?>" name="password" class="form-control" type="password">
+									</div>
+									<button type="submit" class="btn btn-sm btn-primary m-r-5">Submit</button>
+									<a type="submit" class="btn btn-sm btn-default" href="user.php">Cancel</a>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	<?php include 'script.php'; ?>
 </body>
-</html>
 
+</html>

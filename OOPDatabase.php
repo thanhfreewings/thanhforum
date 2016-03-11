@@ -169,6 +169,7 @@ class OOPDatabase{
 		$email 		= $inputs['email'];
 		$password 	= $inputs['password'];
 		$validData  = true;
+		$result = false;
 		if(strlen($name) == 0 ||
 		   strlen($email) == 0  ||
 		   strlen($password) == 0) 
@@ -193,6 +194,7 @@ class OOPDatabase{
 		$content 	= $inputs['content'];
 		$updated_at = time();
 		$validData  = true;
+		$result = false;
 		if(strlen($title) == 0 ||
 		   strlen($content) == 0) 
 		{
@@ -292,7 +294,7 @@ class OOPDatabase{
 		return $thread;
 	}
 	public function getUsers(){
-		//$users = array();
+		$users = array();
 		$query = mysqli_query($this->_connection, "select * from user");
 		while ($row = mysqli_fetch_array($query)) {
 			$users[] = $this->loadUser($row);
@@ -300,6 +302,7 @@ class OOPDatabase{
 		return $users;
 	}
 	public function getUserByOtherId($id){
+		$users = array();
 		$query = mysqli_query($this->_connection, "select * from user where id = $id");
 		while ($row = mysqli_fetch_array($query)) {			
 			$users[] = $this->loadUser($row);
@@ -322,6 +325,7 @@ class OOPDatabase{
 		return $query;
 	}
 	public function getMessagesByReceiverId($id){
+		$messages = array();
 		$query = mysqli_query($this->_connection, "select * from message where receiver_id = $id order by id desc");
 		while ($row = mysqli_fetch_array($query)) {
 		$messages[] = $this->loadMessage($row);

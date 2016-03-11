@@ -9,13 +9,13 @@ if(!$_SESSION['login_user'])
 {
 	header('location: login.php');
 }
-$user_Id = $_SESSION['login_id'];
+$user_id = $_SESSION['login_id'];
 require('OOPDatabase.php');
 $database = new OOPDatabase();
-if($user_Id == 1){
+if($user_id == 1){
 	$users = $database->getUsers();
 }else{
-	$users = $database->getUserByOtherId($user_Id);
+	$users = $database->getUserByOtherId($user_id);
 }
 ?>
 
@@ -41,25 +41,29 @@ if($user_Id == 1){
 			echo '<td><b> 		 </b></td>';
 			echo '<td><b> 		 </b></td>';
 			echo '</tr>';
-			foreach ($users as $user) {
-				echo '<tr>';
-				echo '<td>'.$user->id.'</td>';
-				echo '<td>'.$user->name.'</td>';
-				echo '<td>'.$user->email.'</td>';
-				echo '<td>'.$user->password.'</td>';
-				echo '<td><a href="/create_message.php?id='.$user->id.'">message</a></td>';
-				echo '<td><a href="/update_user.php?id='.$user->id.'">update</a></td>';
-				if($user->id == 1){
-					echo '<td></td>';
-				}else{
-					echo '<td><a href="/delete_user.php?id='.$user->id.'">delete</a></td>';
+			if(!empty($users)){
+				foreach ($users as $user) {
+					echo '<tr>';
+					echo '<td>'.$user->id.'</td>';
+					echo '<td>'.$user->name.'</td>';
+					echo '<td>'.$user->email.'</td>';
+					echo '<td>'.$user->password.'</td>';
+					echo '<td><a href="/reply_message.php?id='.$user->id.'">message</a></td>';
+					echo '<td><a href="/update_user.php?id='.$user->id.'">update</a></td>';
+					if($user->id == 1){
+						echo '<td></td>';
+					}else{
+						echo '<td><a href="/delete_user.php?id='.$user->id.'">delete</a></td>';
+					}
+					echo '</tr>';
 				}
-				echo '</tr>';
+			}else{
+				echo '<br><tr><td>Please logout...</td></tr>';
 			}
 			echo '</table>';
 			?>
 		</div>
 	</div>
-
+	<?php include('script.php');?>
 </body>
 </html>

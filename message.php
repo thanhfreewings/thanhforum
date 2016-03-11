@@ -35,7 +35,7 @@ $messages = $database->getMessagesByReceiverId($receiver_id);
 			echo 	'<td> 		</td>';
 			echo 	'<td> 		</td>';
 			echo '</tr>';
-			if($messages != NULL){
+			if(!empty($messages)){
 				foreach($messages as $message)
 				{
 					echo '<tr>';
@@ -53,5 +53,6 @@ $messages = $database->getMessagesByReceiverId($receiver_id);
 			?>
 		</div>
 	</div>
+	<?php include('script.php');?>
 </body>
 </html>
