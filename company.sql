@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `created_by` int(11) NOT NULL,
   `receiver_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+);
 
 -- --------------------------------------------------------
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+);
 
 
 CREATE TABLE IF NOT EXISTS `thread` (
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `thread` (
   `updated_at` int(10),
   PRIMARY KEY (`id`),
   FOREIGN KEY (`created_by`) REFERENCES user(`id`)
-)
+);
 
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`created_by`) REFERENCES user(`id`),
   FOREIGN KEY (`thread_id`) REFERENCES thread(`id`)
-)
+);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

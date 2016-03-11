@@ -1,11 +1,8 @@
 <?php
 $user_name = $_SESSION['login_name'];
 ?>
-<!-- begin #header -->
 <div id="header" class="header navbar navbar-default navbar-fixed-top">
-	<!-- begin container -->
 	<div class="container">
-		<!-- begin navbar-header -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar">
 				<span class="icon-bar"></span>
@@ -19,8 +16,6 @@ $user_name = $_SESSION['login_name'];
 				</span>
 			</a>
 		</div>
-		<!-- end navbar-header -->
-		<!-- begin #header-navbar -->
 		<div class="collapse navbar-collapse" id="header-navbar">
 			<ul class="nav navbar-nav navbar-right">
 				<li>
@@ -33,15 +28,13 @@ $user_name = $_SESSION['login_name'];
 				</li>
 				<li><a href="/user.php">User</a></li>
 				<li><a href="/message.php">Inbox</a></li>
-				<li><a href="/sent.php">Sent message</a></li>
-				<li><a href="/create_message.php">create message</a></li>
+				<li><a href="/sent.php">Sent</a></li>
+				<li><a href="/create_message.php">Message</a></li>
+				<li><a href="/thread.php">Threads</a></li>
 				<li><a href="/create_thread.php">Compose</a></li>
-				<li><a href="/logout.php">logout</a></li>
+				<li><a href="/logout.php">Logout</a></li>
 				<li><a>Hi, <?php echo $user_name; ?> </a></li>
 			</ul>
 		</div>
-		<!-- end #header-navbar -->
 	</div>
-	<!-- end container -->
 </div>
-<!-- end #header -->

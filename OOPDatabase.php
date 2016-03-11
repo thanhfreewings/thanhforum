@@ -263,6 +263,7 @@ class OOPDatabase{
 	* Return all users in table user
 	*/
 	public function getThread(){
+		$threads = [];
 		$query = mysqli_query($this->_connection, "select * from thread order by id desc");
 		while ($row = mysqli_fetch_array($query)) {
 			$threads[] = $this->loadThread($row);

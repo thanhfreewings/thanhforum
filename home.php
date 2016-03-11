@@ -17,20 +17,12 @@ $threads = $database->getThread();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
 	<title>Home</title>
-	
-	<!-- ================== END BASE JS ================== -->	
 	<?php include('header.php');?>
 	<link type='text/css' rel='stylesheet' href='style.css'/> 
 </head>
 <body>
-
-
-
-	<?php include('menu.php') ?>
-	
-
+	<?php include('menu.php'); ?>
 	<div class="content">
 		<div class="container">
 			
@@ -47,7 +39,10 @@ $threads = $database->getThread();
 									<h4 class="title"><a href="/view_thread.php?id=<?php echo $thread->id ?>"><?php echo $thread->title ?></a></h4>
 									<p class="desc">
 										<?php echo substr($thread->content, 0,500).'...<br>'; ?>
-										<p class="desc">updated at <?php echo date('Y-m-d h:i:s',$thread->updated_at) ?></p>
+										<?php if(!empty($thread->updated_at)): ?>
+										<p class="desc">(updated at <?php echo date('Y-m-d h:i:s',$thread->updated_at).')'; ?>
+										<?php endif ?>
+										</p>
 									</p>
 								</div>
 								<div class="total-count">
@@ -64,25 +59,5 @@ $threads = $database->getThread();
 			</div>
 		</div>
 	</div>
-
-	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-	<script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<!--[if lt IE 9]>
-	<script src="assets/crossbrowserjs/html5shiv.js"></script>
-	<script src="assets/crossbrowserjs/respond.min.js"></script>
-	<script src="assets/crossbrowserjs/excanvas.min.js"></script>
-	<![endif]-->
-	<script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
-	<script src="assets/js/apps.min.js"></script>
-	<!-- ================== END BASE JS ================== -->
-	
-	<script>    
-		$(document).ready(function() {
-			App.init();
-		});
-	</script>
-
 </body>
 </html>

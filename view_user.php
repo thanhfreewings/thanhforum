@@ -19,21 +19,21 @@ $users = $database->getUserByOtherId($user_Id);
 <html>
 <head>
 	<title>view user</title>
-	<link type='text/css' rel='stylesheet' href='style.css'/>
-	<link type='text/css' rel='stylesheet' href='style.css'/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">		
+	<?php include('header.php'); ?>
 </head>
 <body>
 	<?php include('menu.php') ?>
-	<div class="container">
-		<?php
-		foreach ($users as $user) {
-			echo '<br><br>';
-			echo '<h3>User name: '.$user->name.'</h3>';
-			echo '<a href="/reply_message.php?id='.$user->id.'">message </a><a href="thread_user.php?id='.$user->id.'"> thread</a>';
-			echo '<p>Email: '.$user->email.'</p>';
-		}
-		?>
+	<div class="content">
+		<div class="container">
+			<?php
+			foreach ($users as $user) {
+				echo '<br><br>';
+				echo '<h3>User name: '.$user->name.'</h3>';
+				echo '<a href="/reply_message.php?id='.$user->id.'">message </a><a href="thread_user.php?id='.$user->id.'"> thread</a>';
+				echo '<p>Email: '.$user->email.'</p>';
+			}
+			?>
+		</div>
 	</div>
 </body>
 </html>

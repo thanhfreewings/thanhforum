@@ -22,30 +22,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 ?>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
 	<title>update thread</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php include('header.php');?>
 </head>
 
 <body>
 	<?php include('menu.php') ?>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<form class="form-horizontal" method="POST">
-					<div class="form-group">
-					<label >Title</label>
-						<input value="<?php echo $thread['title']; ?>" name="title" type="text" class="form-control">
-					</div>
-					<div class="form-group">
-					<label >Content</label>
-						<textarea name="content" class="form-control" rows="3"><?php echo $thread['content']; ?></textarea>
-					</div>
-					
-					<button type="submit" class="btn btn-default">Update Thread</button>
-				</form>
+	<div class="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<form class="form-horizontal" method="POST">
+						<div class="form-group">
+							<label >Title</label>
+							<input value="<?php echo $thread['title']; ?>" name="title" type="text" class="form-control">
+						</div>
+						<div class="form-group">
+							<label >Content</label>
+							<textarea name="content" class="form-control" rows="3"><?php echo $thread['content']; ?></textarea>
+						</div>
+
+						<button type="submit" class="btn btn-default">Update Thread</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
