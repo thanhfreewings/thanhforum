@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 						</div>
 						<div class="form-group">
 							<?php if(!empty($error)){echo $error.'<br><br>';} ?>
-							<button type="submit" class="btn btn-default">Create</button>
+							<button type="submit" class="btn btn-default">Create Thread</button>
 						</div>
 					</form>
 				</div>
