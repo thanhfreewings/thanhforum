@@ -89,7 +89,8 @@ class OOPDatabase{
 
 		$validData = true;
 		if(	strlen($title) == 0 ||
-			strlen($content) == 0 ) 
+			strlen($content) == 0 ||
+			strlen($title) > 50) 
 		{
 			$validData = false;
 			$result = false;
@@ -301,13 +302,17 @@ class OOPDatabase{
 		}
 		return $users;
 	}
-	public function getUserByOtherId($id){
+	public function getUserById($id){
 		$users = array();
 		$query = mysqli_query($this->_connection, "select * from user where id = $id");
-		while ($row = mysqli_fetch_array($query)) {			
+		while ($row = mysqli_fetch_array($query)) {
 			$users[] = $this->loadUser($row);
 		}
 		return $users;
+	}
+	public function getUserByOtherId($id){
+		$query = mysqli_query($this->_connection, "select * from user where id = $id");
+		return mysqli_fetch_array($query);
 	}
 	public function loadUser($row){
 		$user = new User();

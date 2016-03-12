@@ -1,12 +1,13 @@
 <?php
 error_reporting(E_ALL);
-//ini_set('display_errors', 'On');
+ini_set('display_errors', 'On');
 session_start(); 
 
 require('OOPDatabase.php');
 $database = new OOPDatabase();
 $created_by = $_SESSION['login_id'];
-
+$users = $database->getUsers();
+$error = "";
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$result = $database->createMessage($_POST);
 	if($result == true){
@@ -14,11 +15,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	}
 	else
 	{
-		$error = "Failed to sent message";
+		$error = "Failed to sent message!";
 	}
 }
-$users = $database->getUsers();
-
 ?>
 <html lang="en">
 <head>
@@ -54,8 +53,8 @@ $users = $database->getUsers();
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
+								<?php if(!empty($error)){echo $error.'<br><br>';} ?>
 								<button type="submit" class="btn btn-default">Send message</button>
-								<?php echo '<br><br>'.$error; ?>
 							</div>
 						</div>
 					</form>

@@ -38,7 +38,10 @@ $threads = $database->getThread();
 								<div class="info">
 									<h4 class="title"><a href="/view_thread.php?id=<?php echo $thread->id ?>"><?php echo $thread->title ?></a></h4>
 									<p class="desc">
-										<?php echo substr($thread->content, 0,500).'...<br>'; ?>
+										<?php
+											echo substr($thread->content, 0,500);
+											if(strlen($thread->content) > 500){ echo '...'; }
+											echo '<br>'; ?>
 										<?php if(!empty($thread->updated_at)): ?>
 										<p class="desc">(updated at <?php echo date('Y-m-d h:i:s',$thread->updated_at).')'; ?>
 										<?php endif ?>

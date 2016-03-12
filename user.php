@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL); 
-ini_set('display_errors', 'On');
+//ini_set('display_errors', 'On');
 session_start();
 	//$error = '';
 
@@ -15,7 +15,7 @@ $database = new OOPDatabase();
 if($user_id == 1){
 	$users = $database->getUsers();
 }else{
-	$users = $database->getUserByOtherId($user_id);
+	$users = $database->getUserById($user_id);
 }
 ?>
 
@@ -28,7 +28,6 @@ if($user_id == 1){
 <body>
 	<?php include('menu.php') ?>
 	<div class="content">
-		
 		<div class="container">
 			<?php
 			echo '<table class="table table-striped">';

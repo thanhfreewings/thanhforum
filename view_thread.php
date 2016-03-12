@@ -38,7 +38,7 @@ $comments = $database->getCommentByThreadId($thread_id);
 				<form method="POST" action="add_comment.php">
 					<input type="hidden" name="thread_id" value="<?php echo $thread['id']?>">
 					<div class="form-group">
-						<label>Comment...</label>
+						<label>Comment</label>
 						<textarea name="content" class="form-control" rows="3"></textarea>
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>

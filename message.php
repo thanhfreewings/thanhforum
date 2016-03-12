@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL); 
-//ini_set('display_errors', 'On');
+ini_set('display_errors', 'On');
 session_start();
 $error = '';
 	//check xem dat login chua
@@ -26,33 +26,39 @@ $messages = $database->getMessagesByReceiverId($receiver_id);
 	<?php include('menu.php') ?>
 	<div class="content">
 		<div class="container">
-			<?php
-			echo '<table class="table">';
-			echo '<tr class="active">';
-			echo 	'<td>ID 	</td>';
-			echo 	'<td>Message</td>';
-			echo 	'<td>Sender </td>';
-			echo 	'<td> 		</td>';
-			echo 	'<td> 		</td>';
-			echo '</tr>';
-			if(!empty($messages)){
-				foreach($messages as $message)
-				{
-					echo '<tr>';
-					echo 	'<td>'.$message->id.'</td>';
-					echo 	'<td>'.$message->message.'</td>';
-					echo 	'<td>'.$database->getNameById($message->created_by).'</td>';
-					echo 	'<td><a href="/reply_message.php?id='.$message->created_by.'">Reply</a></td>';
-					echo 	'<td><a href="/delete_message.php?id='.$message->id.'">Delete</a></td>';
-					echo '</tr>';
-				}	
-			}else{
-				echo '<tr><td>your inbox is empty...</td></tr>';
-			}
-			echo '</table>';
-			?>
+			<table class="table table-email">
+				<thead>
+					<tr>
+						<th class="email-select"><a href="#" data-click="email-select-all"><i class="fa fa-square-o fa-fw"></i></a></th>
+						<th colspan="2">
+							<a href="" class="email-header-link" >Inbox(<?php echo count($messages) ?>)  </a>
+						</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php if(!empty($messages)): ?>
+						<?php foreach($messages as $message): ?>
+							<tr>
+							<td class="email-select"><a href="" data-click="email-select-single"><i class="fa fa-square-o fa-fw"></i></a></td>
+								<td class="email-sender">
+									<a href="/view_user.php?id=<?php echo $message->created_by ?>"><?php echo $database->getNameById($message->created_by) ?></a>
+								</td>
+								<td class="email-subject">
+									<a href="/delete_message.php?id=<?php echo $message->id ?>" class="email-btn" data-click="email-remove"><i class="fa fa-trash-o"></i></a>
+								</td>
+								<td><?php echo $message->message ?></td>	
+								<td class="email-date"><a href="/reply_message.php?id=<?php echo $message->created_by ?>">reply</a></td>
+							</tr>
+						<?php endforeach ?>
+					<?php endif ?>
+				</tbody>
+			</table>
+			<?php if(empty($messages)){ echo "You do'nt have any messages."; } ?>
 		</div>
 	</div>
-	<?php include('script.php');?>
+</div>
+<?php include('script.php');?>
 </body>
 </html>

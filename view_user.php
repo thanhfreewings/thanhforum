@@ -9,10 +9,12 @@ if(!$_SESSION['login_user'])
 {
 	header('location: login.php');
 }
-$user_Id = $_GET['id'];
+$userId = $_GET['id'];
 require('OOPDatabase.php');
 $database = new OOPDatabase();
-$users = $database->getUserByOtherId($user_Id);
+$user = $database->getUserByOtherId($userId);
+$threadCount = $database->getThreadByUserCreated($userId);
+
 ?>
 
 <!DOCTYPE html>
@@ -26,12 +28,11 @@ $users = $database->getUserByOtherId($user_Id);
 	<div class="content">
 		<div class="container">
 			<?php
-			foreach ($users as $user) {
 				echo '<br><br>';
-				echo '<h3>User name: '.$user->name.'</h3>';
-				echo '<a href="/reply_message.php?id='.$user->id.'">message </a><a href="thread_user.php?id='.$user->id.'"> thread</a>';
-				echo '<p>Email: '.$user->email.'</p>';
-			}
+				echo '<h3>User name: '.$user['name'].'</h3>';
+				echo '<a href="/reply_message.php?id='.$user['id'].'">message </a><a href="thread_user.php?id='.$user['id'].'"> thread</a><br>';
+				echo 'Thread created: '.count($threadCount);				
+				echo '<p>Email: '.$user['email'].'</p>';
 			?>
 		</div>
 	</div>
