@@ -53,7 +53,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<?php if(!empty($error)){echo $error.'<br><br>';} ?>
+								<?php if(!empty($error)): ?>
+									<div class="alert alert-warning fade in m-b-15">
+										<strong>Error! </strong>
+										<?php echo $error ?>
+									</div>
+								<?php endif ?>
 								<button type="submit" class="btn btn-default">Send message</button>
 							</div>
 						</div>

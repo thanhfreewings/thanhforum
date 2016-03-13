@@ -3,12 +3,15 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 session_start();
 
+$error = "";
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     require('OOPDatabase.php');
     $database = new OOPDatabase();
     $login = $database->login($_POST);
     if($login == true){
         header('location: home.php');
+    }else{
+        $error = "Failed to login!";
     }
 }
 ?>
@@ -39,9 +42,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> Check me out
+                                            <input type="checkbox"> Remember me
                                         </label>
                                     </div>
+                                    <?php if(!empty($error)): ?>
+                                    <div class="alert alert-warning fade in m-b-15">
+                                        <strong>Error! </strong>
+                                        <?php echo $error ?>
+                                    </div>
+                                    <?php endif ?>
                                     <button type="submit" class="btn btn-sm btn-primary m-r-5">Submit</button></br>
                                     <a href = "/sign_up.php">Create an account.</a>
                                 </fieldset>
