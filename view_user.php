@@ -22,11 +22,14 @@ $threadCount = $database->getThreadByUserCreated($userId);
 <head>
 	<title>view user</title>
 	<?php include('header.php'); ?>
+	<link type='text/css' rel='stylesheet' href='style.css'/>
 </head>
 <body>
 	<?php include('menu.php') ?>
 	<div class="content">
 		<div class="container">
+			<img src="/image/user.png" alt="User" height="85" width="85">
+			<div class="viewUser">
 			<?php
 				echo '<br><br>';
 				echo '<h3>User name: '.$user['name'].'</h3>';
@@ -34,6 +37,8 @@ $threadCount = $database->getThreadByUserCreated($userId);
 				echo 'Thread created: '.count($threadCount);				
 				echo '<p>Email: '.$user['email'].'</p>';
 			?>
+			</div>
+			<hr style="border-style: inset;border-width: 1px;">
 		</div>
 	</div>
 </body>

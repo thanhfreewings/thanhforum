@@ -29,38 +29,31 @@ if($user_id == 1){
 	<?php include('menu.php') ?>
 	<div class="content">
 		<div class="container">
-			<?php
-			echo '<table class="table table-striped">';
-			echo '<tr>';
-			echo '<td><b>ID 	 </b></td>';
-			echo '<td><b>Name    </b></td>';
-			echo '<td><b>Email   </b></td>';
-			echo '<td><b>Password</b></td>';
-			echo '<td><b> 		 </b></td>';
-			echo '<td><b> 		 </b></td>';
-			echo '<td><b> 		 </b></td>';
-			echo '</tr>';
-			if(!empty($users)){
-				foreach ($users as $user) {
-					echo '<tr>';
-					echo '<td>'.$user->id.'</td>';
-					echo '<td>'.$user->name.'</td>';
-					echo '<td>'.$user->email.'</td>';
-					echo '<td>'.$user->password.'</td>';
-					echo '<td><a href="/reply_message.php?id='.$user->id.'">message</a></td>';
-					echo '<td><a href="/update_user.php?id='.$user->id.'">update</a></td>';
-					if($user->id == 1){
-						echo '<td></td>';
-					}else{
-						echo '<td><a href="/delete_user.php?id='.$user->id.'">delete</a></td>';
-					}
-					echo '</tr>';
-				}
-			}else{
-				echo '<br><tr><td>Please logout...</td></tr>';
-			}
-			echo '</table>';
-			?>
+			<table class="table table-striped">
+				<tr>
+					<td><b>Name    </b></td>
+					<td><b>Email   </b></td>
+					<td><b> 		 </b></td>
+					<td><b> 		 </b></td>
+					<td><b> 		 </b></td>
+				</tr>
+				<?php if(!empty($users)): ?>
+					<?php foreach ($users as $user): ?>
+						<tr>
+							<td><a href="/view_user.php?id=<?php echo $user->id ?>"><?php echo $user->name ?></a></td>
+							<td><a><?php echo $user->email ?></a></td>
+							<td><a href="/reply_message.php?id=<?php echo $user->id ?>">message</a></td>
+							<td><a href="/update_user.php?id=<?php echo $user->id ?>">update</a></td>
+							<?php if($user->id == 1): ?>
+								<td></td>
+							<?php endif ?>
+							<?php if($user->id != 1): ?>
+								<td><a href="/delete_user.php?id='.$user->id.'">delete</a></td>
+							<?php endif ?>
+						</tr>
+					<?php endforeach ?>
+				<?php endif ?>
+			</table>
 		</div>
 	</div>
 	<?php include('script.php');?>

@@ -274,6 +274,7 @@ class OOPDatabase{
 		return $threads;
 	}
 	public function getThreadByUserCreated($id){
+		$threads = array();
 		$query = mysqli_query($this->_connection, "select * from thread where created_by = $id order by id desc");
 		while ($row = mysqli_fetch_array($query)) {
 			$threads[] = $this->loadThread($row);
