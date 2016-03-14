@@ -48,7 +48,7 @@ $comments = $database->getCommentByThreadId($thread_id);
 			<ul class="list-group" style="list-style-type:none">
 				<?php foreach ($comments as $key => $comment) : ?>
 					<li class="list-group">
-						<img src="/image/user.png" alt="User" height="25" width="25">
+						<img src="<?php echo $database->getAvatarById($comment->created_by) ?>" class="img-circle" alt="User" height="30" width="30">
 						<div class="userName">
 							<p><a href="/view_user.php?id=<?php echo $comment->created_by ?>"><?php echo $database->getNameById($comment->created_by); ?></a></p>
 						</div>

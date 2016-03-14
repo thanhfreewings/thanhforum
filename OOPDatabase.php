@@ -365,7 +365,7 @@ class OOPDatabase{
 	}
 
 	public function setUserAvatarPath($user_id,$path){
-		$query = mysqli_query($this->_connection, "update user set `avatar` = '$path' where id = ".$user_id);
+		$query = mysqli_query($this->_connection, "update user set `avatar` = '$path' where id = '$user_id'");
 		if(!$query){
 			echo("Error description: " . mysqli_error($this->_connection));
 			exit();

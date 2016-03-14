@@ -53,7 +53,7 @@ $threads = $database->getThread();
 									</div></td>
 								</div>
 								<div class="latest-post">
-									<p class="time">created at <?php echo date('Y-m-d h:i:s',$thread->created_at) ?> <a href="view_user.php?id=<?php echo $thread->created_by ?>" class="user"><?php echo $database->getNameById($thread->created_by) ?></a><a href=""><img src="<?php echo $database->getAvatarById($thread->created_by) ?>" class="img-circle" alt="avatar" height="35" width="35"></a></p></br>
+									<p class="time">created at <?php echo date('Y-m-d h:i:s',$thread->created_at) ?> <a href="view_user.php?id=<?php echo $thread->created_by ?>" class="user"><?php echo $database->getNameById($thread->created_by) ?><div class="avatar_home"><img src="<?php echo $database->getAvatarById($thread->created_by) ?>" class="img-circle" alt="avatar" height="40" width="40"></div></a></p></br>
 								</div>
 							</div>
 						</li>

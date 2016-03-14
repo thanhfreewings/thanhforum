@@ -25,6 +25,7 @@ $threads = $database->getThreadByUserCreated($user_Id);
     <div class="content">
         <div class="container">
             <div class="col-xs-12 col-sm-9">
+            <h3>Thread you created:</h3><br><hr>
                 <?php
                 if(!empty($threads)){
                     foreach($threads as $thread) {

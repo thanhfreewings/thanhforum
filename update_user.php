@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	<div class="content">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-6 col-md-offset-3">
 					<div class="panel panel-inverse">
 						<div class="panel-body">
 							<form method="POST">
