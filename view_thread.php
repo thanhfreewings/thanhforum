@@ -50,7 +50,7 @@ $comments = $database->getCommentByThreadId($thread_id);
 					<li class="list-group">
 						<img src="/image/user.png" alt="User" height="25" width="25">
 						<div class="userName">
-							<p><a href=""><?php echo $database->getNameById($comment->created_by); ?></a></p>
+							<p><a href="/view_user.php?id=<?php echo $comment->created_by ?>"><?php echo $database->getNameById($comment->created_by); ?></a></p>
 						</div>
 						<small>at <?php echo date('Y-m-d h:i:s',$comment->created_at); ?></small>
 						<p><?php echo $comment->content ?></p>

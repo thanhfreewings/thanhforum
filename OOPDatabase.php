@@ -304,12 +304,8 @@ class OOPDatabase{
 		return $users;
 	}
 	public function getUserById($id){
-		$users = array();
 		$query = mysqli_query($this->_connection, "select * from user where id = $id");
-		while ($row = mysqli_fetch_array($query)) {
-			$users[] = $this->loadUser($row);
-		}
-		return $users;
+		return mysqli_fetch_array($query);
 	}
 	public function getUserByOtherId($id){
 		$query = mysqli_query($this->_connection, "select * from user where id = $id");
@@ -359,5 +355,20 @@ class OOPDatabase{
 		$user = new User();
 		$user->name = $row['name'];
 		return $user->name;
+	}
+	public function getAvatarById($id){
+		$query = mysqli_query($this->_connection, "select * from user where id = $id");
+		$row = mysqli_fetch_array($query);
+		$user = new User();
+		$user->avatar = $row['avatar'];
+		return $user->avatar;
+	}
+
+	public function setUserAvatarPath($user_id,$path){
+		$query = mysqli_query($this->_connection, "update user set `avatar` = '$path' where id = ".$user_id);
+		if(!$query){
+			echo("Error description: " . mysqli_error($this->_connection));
+			exit();
+		}
 	}
 }

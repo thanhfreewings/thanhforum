@@ -12,15 +12,23 @@ if(!$_SESSION['login_user'])
 $user_id = $_SESSION['login_id'];
 require('OOPDatabase.php');
 $database = new OOPDatabase();
-$user = $database->getUserById($user_id);
 
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+	
+	$target_file =  'uploads/'. time() .'_'.$_FILES["avatar"]['name'];
+	$result = move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file);
+
+	$database->setUserAvatarPath($user_id,$target_file);
+	header('location: user.php');
+}
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>User</title>
+	<title>Upload image</title>
 	<?php include('header.php');?>
 	<link type='text/css' rel='stylesheet' href='style.css'/>
 </head>
@@ -28,12 +36,12 @@ $user = $database->getUserById($user_id);
 	<?php include('menu.php') ?>
 	<div class="content">
 		<div class="container">
-			<a href="/upload_image.php"><img src="<?php echo $user['avatar']; ?>" alt="upload avatar" height="100" width="100"></a>
-			<div class="edit_user">
-				<h3><?php echo $user['name'] ?></h3>
-				<p><?php echo $user['email'] ?></p>
-				<p><a href="/update_user.php?id=<?php echo $user['id'] ?>">Edit </a><a href="/delete_user.php?id=<?php echo $user['id'] ?>"> delete</a></p>
-			</div>
+			<br>
+			<form method="post" enctype="multipart/form-data">
+			    Select image to upload:
+			    <input type="file" name="avatar" id="fileToUpload">
+			    <input type="submit" value="Upload Image" name="submit">
+			</form>
 			<br><hr style="border-width: 2px;">
 		</div>
 	</div>

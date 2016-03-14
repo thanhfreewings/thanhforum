@@ -38,7 +38,7 @@ $threadCount = $database->getThreadByUserCreated($userId);
 				echo '<p>Email: '.$user['email'].'</p>';
 			?>
 			</div>
-			<hr style="border-style: inset;border-width: 1px;">
+			<hr style="border-width: 2px;">
 		</div>
 	</div>
 </body>

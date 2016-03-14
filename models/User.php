@@ -4,6 +4,7 @@ class User{
 	public $name;
 	public $email;
 	public $password;
+	public $avatar;
 
 	public function create($inputs){
 
