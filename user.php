@@ -31,10 +31,12 @@ $user = $database->getUserById($user_id);
 			<a href="/upload_image.php"><img src="<?php echo $user['avatar']; ?>" alt="upload avatar" height="100" width="100"></a>
 			<div class="edit_user">
 				<h3><?php echo $user['name'] ?></h3>
-				<p><?php echo $user['email'] ?></p>
-				<p><a href="/update_user.php?id=<?php echo $user['id'] ?>">Edit </a><a href="/delete_user.php?id=<?php echo $user['id'] ?>"> delete</a></p>
+				<p>Email: <?php echo $user['email'] ?></p><br>
+				<p>Phone number:</p><hr>
+				<p><a href="/thread.php">thread</a></p><hr>
+				<p><a href="/update_user.php?id=<?php echo $user['id'] ?>">edit </a></p><hr>
+				<p><a href="/delete_user.php?id=<?php echo $user['id'] ?>">delete user!</a></p><hr>
 			</div>
-			<br><hr style="border-width: 2px;">
 		</div>
 	</div>
 	<?php include('script.php');?>

@@ -22,6 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <head>
 	<title>message</title>
 	<?php include('header.php');?>
+	<link type='text/css' rel='stylesheet' href='style.css'/>
 </head>
 
 <body>
@@ -57,6 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			</div>
 		</div>
 	</div>
+	<?php include('script.php');?>
 </body>
 
 </html>

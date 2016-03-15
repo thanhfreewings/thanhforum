@@ -26,6 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <head>
 	<title>Thanhforum</title>
 	<?php include('header.php') ?>
+	<link type='text/css' rel='stylesheet' href='style.css'/>
 </head>
 <body>
 	<?php include('menu.php') ?>

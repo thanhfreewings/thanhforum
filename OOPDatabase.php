@@ -42,6 +42,7 @@ class OOPDatabase{
 		$name	   = $inputs['name'];
 		$email 	   = $inputs['email'];
 		$password  = $inputs['password'];
+		$avatar    = '/assets/img/user.png';
 		$validData = true;
 		$result = false;
 		if(	strlen($name) == 0 || 
@@ -53,8 +54,8 @@ class OOPDatabase{
 		else{
 			$check = mysqli_query($this->_connection, "select * from user where email = '$email'");
 			if ($check->num_rows == o) {
-				$query = mysqli_query($this->_connection, "insert into user (name, email, password)
-								values('$name', '$email', '$password')");
+				$query = mysqli_query($this->_connection, "insert into user (name, email, avatar, password)
+								values('$name', '$email', '$avatar', '$password')");
 				$result = true;
 			}
 			else{
@@ -363,7 +364,15 @@ class OOPDatabase{
 		$user->avatar = $row['avatar'];
 		return $user->avatar;
 	}
-
+	public function search($inputs){
+		$name = $inputs['name'];
+		$users = array();
+		$query = mysqli_query($this->_connection, "select * from user where name = '$name'");
+		while ($row = mysqli_fetch_array($query)){
+			$users[] = $this->loadUser($row);
+		}
+		return $users;
+	}
 	public function setUserAvatarPath($user_id,$path){
 		$query = mysqli_query($this->_connection, "update user set `avatar` = '$path' where id = '$user_id'");
 		if(!$query){

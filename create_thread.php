@@ -23,6 +23,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	<meta charset="utf-8">
 	<title>create thread</title>
 	<?php include('header.php');?>
+	<link type='text/css' rel='stylesheet' href='style.css'/>
 </head>
 
 <body>
@@ -54,6 +55,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			</div>
 		</div>
 	</div>
+	<?php include('script.php');?>
 </body>
 </html>
 

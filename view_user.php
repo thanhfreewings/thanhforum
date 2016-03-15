@@ -28,7 +28,7 @@ $threads = $database->getThreadByUserCreated($user_id);
 	<?php include('menu.php') ?>
 	<div class="content">
 		<div class="container">
-			<img src="<?php echo $database->getAvatarById($user_id) ?>" class="img-circle" alt="avatar" height="85" width="85">
+			<img src="<?php echo $database->getAvatarById($user['id']) ?>" class="img-circle" alt="avatar" height="85" width="85">
 			<div class="viewUser">
 				<?php
 				echo '<br><br>';
@@ -57,5 +57,6 @@ $threads = $database->getThreadByUserCreated($user_id);
 			</div>
 		</div>
 	</div>
+	<?php include('script.php') ?>
 </body>
 </html>

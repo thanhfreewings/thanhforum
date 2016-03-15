@@ -32,7 +32,7 @@ $comments = $database->getCommentByThreadId($thread_id);
 				<h4><a href=""><?php echo $thread['title']?></a></h4>
 				<?php
 
-				echo '<p>Created at '.date('Y-m-d h:i:s',$thread['created_at']).' update at '.date('Y-m-d h:i:s',$thread['updated_at']).'</p>';
+				echo '<p>Created by <a href="/view_user.php?id='.$thread['created_by'].'">'.$database->getNameById($thread['created_by']).'</a> at '.date('Y-m-d h:i:s',$thread['created_at']).' update at '.date('Y-m-d h:i:s',$thread['updated_at']).'</p>';
 				echo '<p>'.$thread['content'].'</p><br>';
 				?>
 				<form method="POST" action="add_comment.php">
@@ -54,13 +54,13 @@ $comments = $database->getCommentByThreadId($thread_id);
 						</div>
 						<small>at <?php echo date('Y-m-d h:i:s',$comment->created_at); ?></small>
 						<p><?php echo $comment->content ?></p>
-					</li>
-				</br>	
-			<?php endforeach ?>
-		</ul>
+						</li></br>	
+				<?php endforeach ?>
+			</ul>
 
+			</div>
+		</div>
 	</div>
-</div>
-</div>
+	<?php include('script.php');?>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 $user_name = $_SESSION['login_name'];
+$user_id = $_SESSION['login_id'];
 ?>
 <div id="header" class="header navbar navbar-default navbar-fixed-top">
 	<div class="container">
@@ -19,21 +20,19 @@ $user_name = $_SESSION['login_name'];
 		<div class="collapse navbar-collapse" id="header-navbar">
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<form class="navbar-form">
+					<form class="navbar-form" method="POST" action="/result_search.php">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Enter Keywords..." />
+							<input type="text" name="name" class="form-control" placeholder="Enter Name..." />
 							<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
 						</div>
 					</form>
 				</li>
-				<li><a href="/user.php">User</a></li>
 				<li><a href="/message.php">Inbox</a></li>
 				<li><a href="/sent.php">Sent</a></li>
 				<li><a href="/create_message.php">Message</a></li>
-				<li><a href="/thread.php">Threads</a></li>
 				<li><a href="/create_thread.php">Compose</a></li>
 				<li><a href="/logout.php">Logout</a></li>
-				<li><a>Hi, <?php echo $user_name; ?> </a></li>
+				<li><a href="/user.php">Hi, <?php echo $user_name; ?><div class="avatar_menu"><img src="<?php echo $database->getAvatarById($user_id) ?>" class="img-circle" alt="avatar" height="30" width="30"></div> </a></li>
 			</ul>
 		</div>
 	</div>
