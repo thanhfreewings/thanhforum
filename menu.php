@@ -22,7 +22,11 @@ $user_id = $_SESSION['login_id'];
 				<li>
 					<form class="navbar-form" method="POST" action="/result_search.php">
 						<div class="form-group">
+<<<<<<< HEAD
 							<input type="text" name="name" class="form-control" placeholder="Enter Name..." />
+=======
+							<input type="text" name="name" class="form-control" placeholder="Enter Keywords..." />
+>>>>>>> 362e47d193ec2bab7c33b6b068bbfddca9121940
 							<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
 						</div>
 					</form>
