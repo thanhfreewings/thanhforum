@@ -19,6 +19,7 @@ $threads = $database->getThreadByUserCreated($user_Id);
 <head>
     <title>your thread</title>
     <?php include('header.php');?>
+    <link type='text/css' rel='stylesheet' href='style.css'/>
 </head>
 <body>
     <?php include('menu.php') ?>
@@ -44,5 +45,6 @@ $threads = $database->getThreadByUserCreated($user_Id);
             </div>
         </div>
     </div>
+    <?php include('script.php');?>
 </body>
 </html>

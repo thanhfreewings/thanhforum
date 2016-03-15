@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	<div class="content">
 		<div class="container">
 			<br>
-			<form method="post" enctype="multipart/form-data">
+			<form method="POST" enctype="multipart/form-data">
 			    Select image to upload:
 			    <input type="file" name="avatar" id="fileToUpload">
 			    <input type="submit" value="Upload Image" name="submit">

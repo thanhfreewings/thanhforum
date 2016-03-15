@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 14, 2016 at 12:35 PM
+-- Generation Time: Mar 15, 2016 at 11:32 AM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `avatar` varchar(100) DEFAULT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `user`
@@ -130,7 +130,8 @@ INSERT INTO `user` (`id`, `name`, `email`, `avatar`, `password`) VALUES
 (1, 'admin', 'admin@gmail.com', 'uploads/1457931906_cover3.jpg', '1'),
 (10, 'Max', 'max', 'uploads/1457932327_user-7.jpg', '1'),
 (11, 'min', 'min@gmail.com', 'uploads/1457932185_user-2.jpg', '1'),
-(13, 'Min', 'min', 'uploads/1457932441_user-14.jpg', '1');
+(13, 'Min', 'min', 'uploads/1457932441_user-14.jpg', '1'),
+(14, 'Cat', 'cat@gmail.com', '/assets/img/user.png', '1');
 
 --
 -- Constraints for dumped tables

@@ -54,13 +54,13 @@ $comments = $database->getCommentByThreadId($thread_id);
 						</div>
 						<small>at <?php echo date('Y-m-d h:i:s',$comment->created_at); ?></small>
 						<p><?php echo $comment->content ?></p>
-					</li>
-				</br>	
-			<?php endforeach ?>
-		</ul>
+						</li></br>	
+				<?php endforeach ?>
+			</ul>
 
+			</div>
+		</div>
 	</div>
-</div>
-</div>
+	<?php include('script.php');?>
 </body>
 </html>

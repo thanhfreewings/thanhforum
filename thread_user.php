@@ -8,24 +8,25 @@ if(!$_SESSION['login_user'])
 {
     header('location: login.php');
 }
-$user_Id = $_SESSION['login_id'];
-$getThreadById = $_GET['id'];
+$get_id = $_GET['id'];
 require('OOPDatabase.php');
 $database = new OOPDatabase();
-$threads = $database->getThreadByUserCreated($getThreadById);
+$threads = $database->getThreadByUserCreated($get_id);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>thread of <?php echo $database->getNameById($getThreadById); ?></title>
+    <title>thread of <?php echo $database->getNameById($get_id); ?></title>
     <?php include('header.php');?>
+    <link type='text/css' rel='stylesheet' href='style.css'/>
 </head>
 <body>
     <?php include('menu.php') ?>
     <div class="content">
         <div class="container">
             <div class="col-xs-12 col-sm-9">
+                <h3>All threads of <?php echo $database->getNameById($get_id) ?></h3><hr>
                 <?php
                 if(!empty($threads)){
                     foreach($threads as $thread) {
@@ -37,11 +38,12 @@ $threads = $database->getThreadByUserCreated($getThreadById);
                         echo '<p>'.$thread->content.'</p><br>';
                     }
                 }else{
-                    echo $database->getNameById($user_Id).' do not have a thread...';
+                    echo $database->getNameById($get_id).' do not have a thread...';
                 }
                 ?>
             </div>
         </div>
     </div>
+    <?php include('script.php');?>
 </body>
 </html>
