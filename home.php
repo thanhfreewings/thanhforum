@@ -34,8 +34,8 @@ $threads = $database->getThread();
 					<?php foreach ($threads as $key => $thread): ?>
 						<li>
 							<div class="media">
-	                            <img src="<?php echo $thread->getUser()->avatar ?>"><br>
-	                            <a href="/view_user.php?id=<?php $thread->getUser()->id ?>"><?php echo $thread->getUser()->name ?></a>
+	                            <img src="<?php echo $thread->getUser()->avatar ?>">
+	                            <a href="/view_user.php?id=<?php $thread->getUser()->id ?>"><h5><?php echo $thread->getUser()->name ?></h5></a>
 	                        </div>
 							<div class="info-container">
 							
