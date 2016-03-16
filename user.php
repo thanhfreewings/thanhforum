@@ -13,8 +13,6 @@ $user_id = $_SESSION['login_id'];
 require('OOPDatabase.php');
 $database = new OOPDatabase();
 $user = $database->getUserById($user_id);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +26,18 @@ $user = $database->getUserById($user_id);
 	<?php include('menu.php') ?>
 	<div class="content">
 		<div class="container">
-			<a href="/upload_image.php"><img src="<?php echo $user['avatar']; ?>" alt="upload avatar" height="100" width="100"></a>
 			<div class="edit_user">
-				<h3><?php echo $user['name'] ?></h3>
-				<p>Email: <?php echo $user['email'] ?></p><br>
-				<p>Phone number:</p><hr>
-				<p><a href="/thread.php">thread</a></p><hr>
-				<p><a href="/update_user.php?id=<?php echo $user['id'] ?>">edit </a></p><hr>
-				<p><a href="/delete_user.php?id=<?php echo $user['id'] ?>">delete user!</a></p><hr>
+				<div class="note note-info">
+				<ul>
+					<a href="/upload_image.php"><img src="<?php echo $user->avatar; ?>" alt="upload avatar" height="100" width="100"></a>
+					<h3><?php echo $user->name ?></h3><hr>
+					<li>Email: <?php echo $user->email ?></li><br>
+					<li>Phone number:</li><br>
+					<li><a href="/thread.php">thread</a></li><br>
+					<li><a href="/update_user.php?id=<?php echo $user->id ?>">edit profile</a></li><br>
+					<li><a href="/delete_user.php?id=<?php echo $user->id ?>">delete user!</a></li><br>
+				</ul>
+				</div>
 			</div>
 		</div>
 	</div>

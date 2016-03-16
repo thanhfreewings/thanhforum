@@ -15,3 +15,5 @@
 <link href="assets/css/theme/default.css" id="theme" rel="stylesheet" />
 <!-- ================== END BASE CSS STYLE ================== -->
 
+<link type='text/css' rel='stylesheet' href='style.css'/> 
+

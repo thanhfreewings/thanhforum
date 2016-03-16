@@ -306,7 +306,8 @@ class OOPDatabase{
 	}
 	public function getUserById($id){
 		$query = mysqli_query($this->_connection, "select * from user where id = $id");
-		return mysqli_fetch_array($query);
+		$row = mysqli_fetch_array($query);
+		return $this->loadUser($row);
 	}
 	public function getUserByOtherId($id){
 		$query = mysqli_query($this->_connection, "select * from user where id = $id");
@@ -318,6 +319,7 @@ class OOPDatabase{
 		$user->name = $row['name'];
 		$user->email = $row['email'];
 		$user->password = $row['password'];
+		$user->avatar = $row['avatar'];
 		return $user;
 	}
 	/*
@@ -350,20 +352,7 @@ class OOPDatabase{
 		$message->receiver_id = $row['receiver_id'];
 		return $message;
 	}
-	public function getNameById($id){
-		$query = mysqli_query($this->_connection, "select * from user where id = $id");
-		$row = mysqli_fetch_array($query);
-		$user = new User();
-		$user->name = $row['name'];
-		return $user->name;
-	}
-	public function getAvatarById($id){
-		$query = mysqli_query($this->_connection, "select * from user where id = $id");
-		$row = mysqli_fetch_array($query);
-		$user = new User();
-		$user->avatar = $row['avatar'];
-		return $user->avatar;
-	}
+	
 	public function search($inputs){
 		$name = $inputs['name'];
 		$users = array();

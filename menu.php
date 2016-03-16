@@ -1,4 +1,5 @@
 <?php
+require ('models/CurrentUser.php');
 $user_name = $_SESSION['login_name'];
 $user_id = $_SESSION['login_id'];
 ?>
@@ -22,11 +23,7 @@ $user_id = $_SESSION['login_id'];
 				<li>
 					<form class="navbar-form" method="POST" action="/result_search.php">
 						<div class="form-group">
-<<<<<<< HEAD
 							<input type="text" name="name" class="form-control" placeholder="Enter Name..." />
-=======
-							<input type="text" name="name" class="form-control" placeholder="Enter Keywords..." />
->>>>>>> 362e47d193ec2bab7c33b6b068bbfddca9121940
 							<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
 						</div>
 					</form>
@@ -36,7 +33,7 @@ $user_id = $_SESSION['login_id'];
 				<li><a href="/create_message.php">Message</a></li>
 				<li><a href="/create_thread.php">Compose</a></li>
 				<li><a href="/logout.php">Logout</a></li>
-				<li><a href="/user.php">Hi, <?php echo $user_name; ?><div class="avatar_menu"><img src="<?php echo $database->getAvatarById($user_id) ?>" class="img-circle" alt="avatar" height="30" width="30"></div> </a></li>
+				<li><a href="/user.php"><?php echo '<p class="text-capitalize">Hi, '.CurrentUser::getUser()->name.'</p>'; ?><div class="avatar_menu"><img src="<?php echo CurrentUser::getUser()->avatar ?>" class="img-circle" alt="avatar" height="30" width="30"></div> </a></li>
 			</ul>
 		</div>
 	</div>

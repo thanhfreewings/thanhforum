@@ -1,4 +1,6 @@
 <?php
+require_once('OOPDatabase.php');
+
 class Comment{
 	public $id;
 	public $thread_id;
@@ -13,5 +15,10 @@ class Comment{
 	public function delete(){
 
 	}
+	public function getUser(){
+		$database = new OOPDatabase();
+		return $database->getUserById($this->created_by);
+	}
+	
 }
 ?>

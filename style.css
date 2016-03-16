@@ -12,13 +12,19 @@
 	margin-left: 120px;
 }
 .avatar_home{
-	margin-left: 10px;
+	margin-left: 8px;
+}
+.avatar_alt_home{
+
 }
 .avatar_menu{
 	margin-left: 65px;
-	margin-top: -30px;
+	margin-top: -38px;
 }
 .avatar_search{
 	margin-top: -37px;
 	margin-left: 70px;
+}
+.recent-reply{
+	width: 30px !important; 
 }

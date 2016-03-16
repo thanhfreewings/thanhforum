@@ -2,7 +2,6 @@
 error_reporting(E_ALL); 
 ini_set('display_errors', 'On');
 session_start();
-//$error = '';
 
 //check xem da login chua
 if(!$_SESSION['login_user'])
@@ -12,15 +11,19 @@ if(!$_SESSION['login_user'])
 $user_id = $_SESSION['login_id'];
 require('OOPDatabase.php');
 $database = new OOPDatabase();
-
+$error = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	
 	$target_file =  'uploads/'. time() .'_'.$_FILES["avatar"]['name'];
-	$result = move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file);
+	if($target_file != 'uploads/'. time() .'_'){
+		$result = move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file);
 
-	$database->setUserAvatarPath($user_id,$target_file);
-	header('location: user.php');
+		$database->setUserAvatarPath($user_id,$target_file);
+		header('location: user.php');
+	}else{
+		$error = 'Failed to upload avatar!';
+	}
 }
 
 ?>
@@ -37,10 +40,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	<div class="content">
 		<div class="container">
 			<br>
-			<form method="POST" enctype="multipart/form-data">
+			<form method="POST" enctype="multipart/form-data" class="form-horizontal">
 			    Select image to upload:
-			    <input type="file" name="avatar" id="fileToUpload">
-			    <input type="submit" value="Upload Image" name="submit">
+			    <input type="file" name="avatar" id="fileToUpload"><br>
+			    <?php if(!empty($error)): ?>
+					<?php echo $error ?>
+				<?php endif ?>
+			    <button type="submit" class="btn btn-default">Upload</button>
 			</form>
 			<br><hr style="border-width: 2px;">
 		</div>

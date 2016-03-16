@@ -19,7 +19,7 @@ $threads = $database->getThread();
 <head>
 	<title>Home</title>
 	<?php include('header.php');?>
-	<link type='text/css' rel='stylesheet' href='style.css'/> 
+	
 </head>
 <body>
 	<?php include('menu.php'); ?>
@@ -33,7 +33,12 @@ $threads = $database->getThread();
 				<ul class="forum-list">
 					<?php foreach ($threads as $key => $thread): ?>
 						<li>
+							<div class="media">
+	                            <img src="<?php echo $thread->getUser()->avatar ?>"><br>
+	                            <a href="/view_user.php?id=<?php $thread->getUser()->id ?>"><?php echo $thread->getUser()->name ?></a>
+	                        </div>
 							<div class="info-container">
+							
 								<div class="info">
 									<h4 class="title"><a href="/view_thread.php?id=<?php echo $thread->id ?>"><?php echo $thread->title ?></a></h4>
 									<p class="desc">
@@ -53,7 +58,17 @@ $threads = $database->getThread();
 									</div></td>
 								</div>
 								<div class="latest-post">
-									<p class="time">created at <?php echo date('Y-m-d h:i:s',$thread->created_at) ?> <a href="view_user.php?id=<?php echo $thread->created_by ?>" class="user"><?php echo $database->getNameById($thread->created_by) ?><div class="avatar_home"><img src="<?php echo $database->getAvatarById($thread->created_by) ?>" class="img-circle" alt="avatar" height="40" width="40"></div></a></p></br>
+									<p class="time">created at <?php echo date('Y-m-d h:i:s',$thread->created_at) ?></p></br>
+									<ul class="list-inline">
+										<?php foreach ($thread->getRecentUserReplies() as $key => $user): ?>
+											<li>
+												<div class="media recent-reply">
+													<img src="<?php echo $user->avatar?>">
+												</div>
+											</li>
+										<?php endforeach; ?>
+									</ul>
+
 								</div>
 							</div>
 						</li>

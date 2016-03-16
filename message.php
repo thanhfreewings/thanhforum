@@ -41,7 +41,7 @@ $messages = $database->getMessagesByReceiverId($receiver_id);
 					<?php if(!empty($messages)): ?>
 						<?php foreach($messages as $message): ?>
 							<tr>
-							<td class="email-select"><a href="" data-click="email-select-single"><i class="fa fa-square-o fa-fw"></i></a></td>
+								<td><a href="/view_user.php?id=<?php echo $message->created_by ?>"><img src="<?php echo $database->getAvatarById($message->created_by) ?>" class="img-circle" height="25" width="25"></a></td>
 								<td class="email-sender">
 									<a href="/view_user.php?id=<?php echo $message->created_by ?>"><?php echo $database->getNameById($message->created_by) ?></a>
 								</td>
