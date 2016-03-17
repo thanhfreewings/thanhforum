@@ -17,7 +17,8 @@ class Comment{
 	}
 	public function getUser(){
 		$database = new OOPDatabase();
-		return $database->getUserById($this->created_by);
+		$user = $database->getUserById($this->created_by);
+		return $user;
 	}
 	
 }

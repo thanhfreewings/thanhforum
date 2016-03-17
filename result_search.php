@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		<div class="container">
 			<?php if(!empty($users)): ?>
 				<?php foreach ($users as $key => $user): ?>
-					<a href="/view_user.php?id=<?php echo $user->id ?>"><img src="<?php echo $database->getAvatarById($user->id) ?>" class="img-circle" alt="avatar" height="40" width="40"><div class="avatar_search"><h5><?php echo $user->name ?></h5></div></a><br><hr>
+					<a href="/view_user.php?id=<?php echo $user->id ?>"><img src="<?php echo $user->getUser()->avatar ?>" class="img-circle" height="40" width="40"><div class="avatar_search"><h5><?php echo $user->name ?></h5></div></a><br><hr>
 				<?php endforeach ?>
 			<?php endif ?>
 			<?php if(empty($users)): ?>

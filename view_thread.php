@@ -29,38 +29,65 @@ $comments = $database->getCommentByThreadId($thread_id);
 	<div class="content">
 		<div class="container">
 			<div class="col-md-9">
-				<h4><a href=""><?php echo $thread['title']?></a></h4>
-				<?php
 
-				echo '<p>Created by <a href="/view_user.php?id='.$thread['created_by'].'">'.$database->getNameById($thread['created_by']).'</a> at '.date('Y-m-d h:i:s',$thread['created_at']).' update at '.date('Y-m-d h:i:s',$thread['updated_at']).'</p>';
-				echo '<p>'.$thread['content'].'</p><br>';
-				?>
-				<form method="POST" action="add_comment.php">
-					<input type="hidden" name="thread_id" value="<?php echo $thread['id']?>">
-					<div class="form-group">
-						<label>Comment</label>
-						<textarea name="content" class="form-control" rows="3"></textarea>
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</br></br></br>
-			</form>
-
-			<ul class="list-group" style="list-style-type:none">
-				<?php foreach ($comments as $key => $comment) : ?>
-					<li class="list-group">
-						<img src="<?php echo $database->getAvatarById($comment->created_by) ?>" class="img-circle" alt="User" height="30" width="30">
-						<div class="userName">
-							<p><a href="/view_user.php?id=<?php echo $comment->created_by ?>"><?php echo $database->getNameById($comment->created_by); ?></a></p>
+				<ul class="forum-list forum-detail-list">
+					<li>
+						<div class="media">
+							<img src="<?php echo $thread->getUser()->avatar ?>" >
+							<span class="label label-inverse">POSTER</span>
 						</div>
-						<small>at <?php echo date('Y-m-d h:i:s',$comment->created_at); ?></small>
-						<p><?php echo $comment->content ?></p>
-						</li></br>	
-				<?php endforeach ?>
-			</ul>
-
+						<div class="info-container">
+							<div class="post-user"><a href="/view_user.php?id=<?php echo $thread->created_by ?>"><?php echo $thread->getUser()->name ?></a><small><?php echo $thread->title ?></small></div>
+							<div class="post-content">
+								<?php echo $thread->content ?>
+							</div>
+							<div class="post-time">
+								at <?php echo date('Y-m-d h:i:s',$thread->created_at); ?>
+								<?php if(!empty($thread->updated_at)){ echo 'update at '.date('Y-m-d h:i:s',$thread->updated_at); } ?>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<ul class="forum-list forum-detail-list">
+						<li>
+							<div class="info-container">
+								<div class="panel panel-forum">
+									<div class="panel-heading">
+										<h4 class="panel-title">Comment</h4>
+									</div>
+									<div class="panel-body">
+										<form action="add_comment.php" name="wysihtml5" method="POST">
+											<input type="hidden" name="thread_id" value="<?php echo $thread->id ?>">
+											<textarea class="textarea form-control" name="content" placeholder="Enter text ..." rows="10"></textarea>
+											<div class="m-t-10">
+												<button type="submit" class="btn btn-theme">Post Comment <i class="fa fa-paper-plane"></i></button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<ul class="forum-list forum-detail-list">
+						<?php foreach ($comments as $key => $comment) : ?>
+							<li>
+								<div class="media">
+									<img src="<?php echo $comment->getUser()->avatar ?>" >
+									<span class="label label-inverse">USER</span>
+								</div>
+								<div class="info-container">
+									<div class="post-user"><a href="/view_user.php?id=<?php echo $comment->created_by ?>"><?php echo $comment->getUser()->name ?></a><small>SAYS</small></div>
+									<div class="post-content">
+										<?php echo $comment->content ?>
+									</div>
+									<div class="post-time">at <?php echo date('Y-m-d h:i:s',$comment->created_at); ?></div>
+								</div>
+							</li>
+						<?php endforeach ?>                        
+					</ul>
+				</div>
 			</div>
 		</div>
-	</div>
-	<?php include('script.php');?>
-</body>
-</html>
+		<?php include('script.php');?>
+	</body>
+	</html>

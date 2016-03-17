@@ -12,9 +12,7 @@
 	$database = new OOPDatabase();
 	$deleteMessage = $database->deleteMessage($message_id);
 	if($deleteMessage == true){
-		header('location: sent.php');
-	}else {
-		die("Failed to delete message");
+		header('location: delete_complete.php');
 	}
 ?>
 

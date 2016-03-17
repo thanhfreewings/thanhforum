@@ -24,12 +24,31 @@ class Thread{
 		$user = $database->getUserById($this->created_by);
 		return $user;
 	}
+	public function countComment(){
+		$database = new OOPDatabase();
+		$comments = $database->getCommentByThreadId($this->id);
+		return count($comments);
+	}
 	public function getRecentUserReplies(){
 		$users = array();
 		$database = new OOPDatabase();
 		$comments = $database->getCommentByThreadId($this->id);
 		foreach ($comments as $key => $comment) {
-			$users[] = $database->getUserById($comment->created_by);
+			$user = $database->getUserById($comment->created_by);
+
+			$found = false;
+
+			foreach ($users as $value) {
+				if($value->id == $user->id){
+					$found = true;
+					break;
+				}
+			}
+
+			if(!$found){
+				$users[] = $user;
+			}
+			
 		}
 		return $users;
 	}

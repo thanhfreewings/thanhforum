@@ -254,11 +254,6 @@ class OOPDatabase{
 		}
 		return $result;
 	}
-	public function getUser($id){
-		$rows = mysqli_query($this->_connection, "select * from user WHERE id = $id");
-		return mysqli_fetch_array($rows);
-		
-	}
 	public function getMessage($id){
 		$rows = mysqli_query($this->_connection, "select *from message where id = $id");
 		return mysqli_fetch_array($rows);	
@@ -283,8 +278,9 @@ class OOPDatabase{
 		return $threads;	
 	}
 	public function getThreadById($id){
-		$rows = mysqli_query($this->_connection, "select * from thread where id = $id");
-		return mysqli_fetch_array($rows);
+		$query = mysqli_query($this->_connection, "select * from thread where id = $id");
+		$row = mysqli_fetch_array($query);
+		return $this->loadThread($row);
 	}
 	public function loadThread($row){
 		$thread = new Thread();
@@ -308,10 +304,6 @@ class OOPDatabase{
 		$query = mysqli_query($this->_connection, "select * from user where id = $id");
 		$row = mysqli_fetch_array($query);
 		return $this->loadUser($row);
-	}
-	public function getUserByOtherId($id){
-		$query = mysqli_query($this->_connection, "select * from user where id = $id");
-		return mysqli_fetch_array($query);
 	}
 	public function loadUser($row){
 		$user = new User();

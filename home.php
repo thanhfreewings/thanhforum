@@ -31,30 +31,31 @@ $threads = $database->getThread();
 					<h4 class="panel-title">All thread</h4>
 				</div>
 				<ul class="forum-list">
+
 					<?php foreach ($threads as $key => $thread): ?>
 						<li>
 							<div class="media">
-	                            <img src="<?php echo $thread->getUser()->avatar ?>">
-	                            <a href="/view_user.php?id=<?php $thread->getUser()->id ?>"><h5><?php echo $thread->getUser()->name ?></h5></a>
-	                        </div>
+								<img src="<?php echo $thread->getUser()->avatar ?>">
+								<a href="/view_user.php?id=<?php echo $thread->getUser()->id ?>"><h6><?php echo $thread->getUser()->name ?></h6></a>
+							</div>
 							<div class="info-container">
-							
+
 								<div class="info">
 									<h4 class="title"><a href="/view_thread.php?id=<?php echo $thread->id ?>"><?php echo $thread->title ?></a></h4>
 									<p class="desc">
 										<?php if(!empty($thread->updated_at)): ?>
-										<p class="desc">(updated at <?php echo date('Y-m-d h:i:s',$thread->updated_at).')'; ?></p>
+											<p class="desc">(updated at <?php echo date('Y-m-d h:i:s',$thread->updated_at).')'; ?></p>
 										<?php endif ?>
 										<?php
-											echo substr($thread->content, 0,500);
-											if(strlen($thread->content) > 500){ echo '...'; }
-											echo '<br>';
+										echo substr($thread->content, 0,500);
+										if(strlen($thread->content) > 500){ echo '...'; }
+										echo '<br>';
 										?>
 									</p>
 								</div>
 								<div class="total-count">
 									<td class="text-center"><div><i class="fa fa-2x fa-comments-o"></i></div><div class="hidden-xs">
-										<?php echo count($database->getCommentByThreadId($thread->id)) ?>
+										<?php echo $thread->countComment().' replies' ?>
 									</div></td>
 								</div>
 								<div class="latest-post">

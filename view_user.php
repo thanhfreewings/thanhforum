@@ -12,7 +12,7 @@ if(!$_SESSION['login_user'])
 $user_id = $_GET['id'];
 require('OOPDatabase.php');
 $database = new OOPDatabase();
-$user = $database->getUserByOtherId($user_id);
+$user = $database->getUserById($user_id);
 $threadCount = $database->getThreadByUserCreated($user_id);
 $threads = $database->getThreadByUserCreated($user_id);
 ?>
@@ -28,15 +28,13 @@ $threads = $database->getThreadByUserCreated($user_id);
 	<?php include('menu.php') ?>
 	<div class="content">
 		<div class="container">
-			<img src="<?php echo $database->getAvatarById($user['id']) ?>" class="img-circle" alt="avatar" height="85" width="85">
+			<img src="<?php echo $user->avatar ?>" class="img-circle" alt="avatar" height="85" width="85">
 			<div class="viewUser">
-				<?php
-				echo '<br><br>';
-				echo '<h3>User name: '.$user['name'].'</h3>';
-				echo '<a href="/reply_message.php?id='.$user['id'].'">message </a><a href="thread_user.php?id='.$user['id'].'"> thread</a><br>';
-				echo 'Thread created: '.count($threadCount);				
-				echo '<p>Email: '.$user['email'].'</p>';
-				?>
+				<br><br>
+				<h3>User name: <?php echo $user->name ?></h3>
+				<a href="/reply_message.php?id=<?php echo $user->id ?>">message </a><a href="thread_user.php?id=<?php echo $user->id ?>"> thread</a>
+				<p>Thread created: <?php echo count($threadCount) ?></p>
+				<p>Email: <?php echo $user->email ?></p>
 			</div>
 			<hr style="border-width: 2px;">
 			<div class="col-xs-12 col-sm-9">
@@ -51,7 +49,7 @@ $threads = $database->getThreadByUserCreated($user_id);
 						echo '<p>'.$thread->content.'</p><br>';
 					}
 				}else{
-					echo $database->getNameById($user_Id).' do not have a thread...';
+					echo 'do not have a thread...';
 				}
 				?>
 			</div>

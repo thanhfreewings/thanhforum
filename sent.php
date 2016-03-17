@@ -42,8 +42,8 @@ $messages = $database->getMessagesByCreatedBy($createdBy);
 					<?php if(!empty($messages)): ?>
 						<?php foreach($messages as $message): ?>
 							<tr>
-							<td><a href="/view_user.php?id=<?php echo $message->receiver_id ?>"><img src="<?php echo $database->getAvatarById($message->receiver_id) ?>" class="img-circle" height="25" width="25"></a></td>
-								<td class="email-sender"><a href="/view_user.php?id=<?php echo $message->created_by ?>"><?php echo $database->getNameById($message->receiver_id) ?></a></td>
+							<td><a href="/view_user.php?id=<?php echo $message->receiver_id ?>"><img src="<?php echo $message->getReceiver()->avatar ?>" class="img-circle" height="25" width="25"></a></td>
+								<td class="email-sender"><a href="/view_user.php?id=<?php echo $message->created_by ?>"><?php echo $message->getReceiver()->name ?></a></td>
 								<td><?php echo $message->message ?></td>	
 								<td class="email-subject"><a href="/delete_message.php?id=<?php echo $message->id ?>" class="email-btn" data-click="email-remove"><i class="fa fa-trash-o"></i></a></td>
 							</tr>
