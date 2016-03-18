@@ -44,7 +44,7 @@ $threads = $database->getThread();
 									<h4 class="title"><a href="/view_thread.php?id=<?php echo $thread->id ?>"><?php echo $thread->title ?></a></h4>
 									<p class="desc">
 										<?php if(!empty($thread->updated_at)): ?>
-											<p class="desc">(updated at <?php echo date('Y-m-d h:i:s',$thread->updated_at).')'; ?></p>
+											<p class="desc">(updated at <?php echo date('Y-m-d h:i:sa',$thread->updated_at).')'; ?></p>
 										<?php endif ?>
 										<?php
 										echo substr($thread->content, 0,500);
@@ -59,7 +59,7 @@ $threads = $database->getThread();
 									</div></td>
 								</div>
 								<div class="latest-post">
-									<p class="time">created at <?php echo date('Y-m-d h:i:s',$thread->created_at) ?></p></br>
+									<p class="time">created at <?php echo date('Y-m-d h:i:sa',$thread->created_at) ?></p></br>
 									<ul class="list-inline">
 										<?php foreach ($thread->getRecentUserReplies() as $key => $user): ?>
 											<li>

@@ -42,8 +42,8 @@ $comments = $database->getCommentByThreadId($thread_id);
 								<?php echo $thread->content ?>
 							</div>
 							<div class="post-time">
-								at <?php echo date('Y-m-d h:i:s',$thread->created_at); ?>
-								<?php if(!empty($thread->updated_at)){ echo 'update at '.date('Y-m-d h:i:s',$thread->updated_at); } ?>
+								at <?php echo date('Y-m-d h:i:sa',$thread->created_at); ?>
+								<?php if(!empty($thread->updated_at)){ echo 'update at '.date('Y-m-d h:i:sa',$thread->updated_at); } ?>
 								</div>
 							</div>
 						</li>
@@ -80,7 +80,7 @@ $comments = $database->getCommentByThreadId($thread_id);
 									<div class="post-content">
 										<?php echo $comment->content ?>
 									</div>
-									<div class="post-time">at <?php echo date('Y-m-d h:i:s',$comment->created_at); ?></div>
+									<div class="post-time">at <?php echo date('Y-m-d h:i:sa',$comment->created_at); ?></div>
 								</div>
 							</li>
 						<?php endforeach ?>                        

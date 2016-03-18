@@ -1,4 +1,5 @@
 <?php
+require_once('OOPDatabase.php');
 class CurrentUser{
 	public static function getUser(){
 		$database = new OOPDatabase();

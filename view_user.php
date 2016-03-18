@@ -42,9 +42,9 @@ $threads = $database->getThreadByUserCreated($user_id);
 				if(!empty($threads)){
 					foreach($threads as $thread) {
 						echo '<h4><a href="/view_thread.php?id='.$thread->id.'">'.$thread->title.'</a></h4>';
-						echo '<p>Created at '.date('Y-m-d h:i:s',$thread->created_at);
+						echo '<p>Created at '.date('Y-m-d h:i:sa',$thread->created_at);
 						if(!empty($thread->updated_at)){
-							echo ' update at '.date('Y-m-d h:i:s',$thread->updated_at).'</p>';
+							echo ' update at '.date('Y-m-d h:i:sa',$thread->updated_at).'</p>';
 						}
 						echo '<p>'.$thread->content.'</p><br>';
 					}
